@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get LINE User ID</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+  <h2>👤 LINE User ID ของคุณ</h2>
+  <pre id="output" style="font-size: 1.2rem;">กำลังโหลด...</pre>
+
+  <script>
+    async function main() {
+      await liff.init({ liffId: "REPLACE_WITH_YOUR_LIFF_ID" });
+
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const profile = await liff.getProfile();
+        document.getElementById("output").textContent = profile.userId;
+      }
+    }
+
+    main().catch((err) => {
+      document.getElementById("output").textContent = "❌ Error: " + err;
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
